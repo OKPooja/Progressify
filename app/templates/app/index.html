@@ -1,0 +1,9 @@
+{% extends 'main.html' %} {% block content %} {% if user.is_authenticated %}
+<h1>Welcome, {{user.username}}</h1>
+{% endif %} {% if user.is_authenticated %}
+<li><a class="getstarted scrollto" href="logout">Logout</a></li>
+    <li><a href="dashboard">Dashboard</a></li>
+{% else %}
+<li><a class="getstarted scrollto" href="register">Signup</a></li>
+<li><a class="getstarted scrollto" href="login">Login</a></li>
+{% endif %} {% endblock %}

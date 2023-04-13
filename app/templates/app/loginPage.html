@@ -1,30 +1,40 @@
-{% load static %}
+{% extends 'main.html' %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+
     <title>Progressify</title>
   </head>
   <body>
-    {% for message in messages %}
+    {% block content %}
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <div>
+      {% for message in messages %}
       <h5>{{message}}</h5>
-    {% endfor %}
-    <img class="wave" src="/static/images/wave.png" alt="">
+      {% endfor %}
+      <img class="wave" src="{% static 'images/wave.png' %}" alt="" />
       <div class="container">
         <div class="image">
-          <img src="/static/images/task_list.svg" alt="">
+          <img src="{% static 'images/task_list.svg' %}" alt="" />
         </div>
         <div class="login-container">
           <form method="POST" action="login">
             {% csrf_token %}
-            <img class="profile" src="/static/images/profile.svg" alt="">
+            <img
+              class="profile"
+              src="{% static 'images/profile.svg' %}"
+              alt=""
+            />
             <h2>Login</h2>
             <div class="input-div one">
               <div class="i">
@@ -32,7 +42,7 @@
               </div>
               <div>
                 <h5>Username</h5>
-                <input class="input" type="text" name="username">
+                <input class="input" type="text" name="username" />
               </div>
             </div>
             <div class="input-div two">
@@ -41,15 +51,16 @@
               </div>
               <div>
                 <h5>Password</h5>
-                <input class="input" type="password" name="password">
+                <input class="input" type="password" name="password" />
               </div>
             </div>
             <a href="#">Forgot Password?</a>
-            <input type="submit" class="btn" value="Login">
+            <input type="submit" class="btn" value="Login" />
           </form>
         </div>
       </div>
-      <script type="text/javascript" src="/static/main.js"></script>
-  
+      <script type="text/javascript" src="{% static 'main.js' %}"></script>
+      {% endblock %}
+    </div>
   </body>
 </html>

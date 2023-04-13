@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/style.css" />
+    <title>Progressify</title>
+  </head>
+  <body>
+    {% for message in messages %}
+    <h5>{{message}}</h5>
+    {% endfor %}
+    <img class="waveflip" src="/static/images/waveflip.png" alt="" />
+    <div class="container">
+      <div class="login-container">
+        <form method="POST" action="register">
+          {% csrf_token %}
+          <img class="profile" src="/static/images/profile.svg" alt="" />
+          <h2>Register</h2>
+          <div class="input-div one">
+            <div class="i">
+              <i class="fas fa-user"></i>
+            </div>
+            <div>
+              <h5>Name</h5>
+              <input class="input" type="text" name="username" />
+            </div>
+          </div>
+          <div class="input-div two">
+            <div class="i">
+              <i class="fas fa-solid fa-envelope"></i>
+            </div>
+            <div>
+              <h5>Email</h5>
+              <input class="input" type="text" name="email" />
+            </div>
+          </div>
+          <div class="input-div three">
+            <div class="i">
+              <i class="fas fa-lock"></i>
+            </div>
+            <div>
+              <h5>Password</h5>
+              <input class="input" type="password" name="password1" />
+            </div>
+          </div>
+          <div class="input-div three">
+            <div class="i">
+              <i class="fas fa-lock"></i>
+            </div>
+            <div>
+              <h5>Password Again</h5>
+              <input class="input" type="password" name="password2" />
+            </div>
+          </div>
+          <input type="submit" class="btn" value="Register" />
+        </form>
+      </div>
+    </div>
+    <script type="text/javascript" src="/static/main.js"></script>
+  </body>
+</html>
