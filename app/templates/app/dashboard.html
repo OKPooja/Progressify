@@ -7,7 +7,7 @@
 <li><a class="getstarted scrollto" href="logout">Logout</a></li>
 {% endif %}
     <div>
-    <h2>To-do for today!</h2>
+    <h2>Your To-do list</h2>
         {% for task in tasks %}
     <span>{{ task.name }}</span>
     <span>{{ task.time|date:'d-m-y' }}</span><br>
@@ -23,4 +23,11 @@
         {% endfor %}
     <a href='{% url 'add-goal' %}'>Add a Goal</a>
     </div><br>
+    <div>
+    <p>How long did you sleep yesterday? (in hours)</p>
+    <input type="number" name="sleep" data-sleep>
+    <input type="button" value="Submit" onclick="submitForm()" data-sleep-button>
+    </div>
+    {% load static %}
+    <script src="{% static 'dashboard.js' %}"></script>
 {% endblock %}

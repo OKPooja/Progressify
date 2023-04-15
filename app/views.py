@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
-from .models import Profile, Task, Goal
+from .models import Profile, Task, Goal, Quota
 
 
 # Create your views here.
@@ -72,10 +73,15 @@ def info(request):
 
 
 @login_required(login_url='login')
+@csrf_exempt
 def dashboard(request):
     tasks = Task.objects.filter(user=request.user)
     goals = Goal.objects.filter(user=request.user)
-    return render(request, 'app/dashboard.html', {'tasks': tasks, 'goals': goals})
+    if request.method == 'POST':
+        sleepHours = request.POST.get('sleep')
+        return HttpResponse('Success')
+    else:
+        return render(request, 'app/dashboard.html', {'tasks': tasks, 'goals': goals})
 
 
 @login_required(login_url='login')

@@ -1,0 +1,248 @@
+a {
+  margin-left: 10px;
+}
+
+a {
+  margin-left: 50px;
+}
+
+.navbar-brand {
+  margin-left: 15px;
+}
+
+#quote1 {
+  padding-top: 150px;
+  font-size: 60px;
+}
+
+.navbar-nav {
+  margin-right: 60px;
+}
+
+#quote2 {
+  padding-top: 3px;
+  font-size: 60px;
+  margin-right: 130px;
+}
+
+#image1 {
+  margin-right: 2px;
+}
+
+#image2 {
+  margin-left: 2px;
+}
+
+p {
+  padding-top: 20px;
+}
+
+p {
+  font-size: 18px;
+  margin-right: 20px;
+}
+
+#tracking {
+  /*top: 800px;*/
+  padding-top: 120px;
+  width: 400px;
+  /*height: 100px;*/
+}
+
+.card {
+  top: 150px;
+}
+
+#col1 {
+  width: 300px;
+  margin-right: 100px;
+}
+
+#col2 {
+  width: 850px;
+  height: 300px;
+}
+
+#secondpage {
+  padding-top: 30px;
+}
+
+section {
+  overflow-x: hidden;
+  padding-top: 30px;
+}
+
+@media (min-width: 300px) {
+  #page1 {
+    margin-top: 130px;
+  }
+}
+
+@media (min-width: 300px) {
+  #page1 {
+    margin-top: 0px;
+  }
+}
+
+#quote-2 {
+  margin-right: 120px;
+  font-size: 60px;
+}
+
+#con1 {
+  margin-top: 50px;
+}
+
+#row1 {
+  height: 480px;
+}
+
+#quote-1 {
+  margin-top: 50px;
+}
+
+#page2 {
+  margin-top: 150px;
+}
+
+#col-21 {
+  width: 600px;
+}
+
+#col-22 {
+  width: 350px;
+}
+
+#feature-1 {
+  margin-top: 70px;
+  box-shadow: 10px 10px 10px 0px rgba(11,43,91,0.75);
+}
+
+#con2 {
+  margin-top: -40px;
+}
+
+#row-21 {
+  height: 480px;
+}
+
+#col-32 {
+  width: 600px;
+  height: 300px;
+}
+
+#col-31 {
+  width: 600px;
+}
+
+#col-42 {
+  width: 400px;
+}
+
+#col-41 {
+  width: 600px;
+}
+
+#row-31 {
+  height: 480px;
+}
+
+#row-41 {
+  height: 480px;
+}
+
+#row-51 {
+  height: 480px;
+}
+
+#col-51 {
+  width: 600px;
+}
+
+#col-52 {
+  width: 600px;
+}
+
+#page5 {
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+#con5 {
+  margin-top: 0px;
+}
+
+#feature-4 {
+  margin-top: 100px;
+}
+
+#page3 {
+  overflow: hidden;
+}
+
+#page6 {
+  margin-top: 100px;
+  overflow: hidden;
+}
+
+#row-61 {
+  height: 480px;
+}
+
+#col-61 {
+  width: 600px;
+}
+
+#col-62 {
+  width: 400px;
+}
+
+#charts {
+  margin-top: -50px;
+}
+
+#feature-4 {
+  margin-top: 30px;
+}
+
+#feature-3 {
+  margin-top: 40px;
+}
+
+#exercise {
+  margin-top: 35px;
+}
+
+#feature-6 {
+  margin-top: 20px;
+}
+
+#contactform {
+  width: 800px;
+}
+
+#footercol {
+  width: 700px;
+}
+
+#column {
+  width: 300px;
+  height: 100px;
+}
+
+#studying {
+  margin-left: 60px;
+}
+
+#feature-2 {
+  margin-top: 80px;
+}
+
+#nav {
+  box-shadow: 0px 0px 10px 0px #4f5440;
+}
+
+.navbar navbar-light navbar-expand-md sticky-top.scrolled {
+  background: #CCD5AE;
+}
+
