@@ -23,11 +23,19 @@
         {% endfor %}
     <a href='{% url 'add-goal' %}'>Add a Goal</a>
     </div><br>
-    <div>
+    <form method="POST" aciton="dashboard">
+        {% csrf_token %}
     <p>How long did you sleep yesterday? (in hours)</p>
     <input type="number" name="sleep" data-sleep>
-    <input type="button" value="Submit" onclick="submitForm()" data-sleep-button>
-    </div>
+    <input type="submit" value="Submit" data-sleep-button>
+    </form>
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
     {% load static %}
-    <script src="{% static 'dashboard.js' %}"></script>
+    <script type="text/javascript">
+        let sleep = {{ sleep }};
+        let sleepDate = {{ sleepDate }};
+        console.log(sleepDate)
+    </script>
 {% endblock %}

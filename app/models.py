@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.utils import timezone
 
 # Create your models here.
 class Profile(models.Model):
@@ -27,5 +27,6 @@ class Goal(models.Model):
 
 class Quota(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    sleep = models.IntegerField(null=True)
-    study = models.IntegerField(null=True)
+    sleep = models.IntegerField(null=True,blank=True)
+    study = models.IntegerField(null=True,blank=True)
+    date = models.DateField(default=timezone.now)
