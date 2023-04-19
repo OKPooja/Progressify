@@ -83,20 +83,21 @@ def dashboard(request):
     goals = Goal.objects.filter(user=request.user)
     sleep = list(Quota.objects.filter(user=request.user).values_list('sleep', flat=True))
     sleepTime = list(Quota.objects.filter(user=request.user).values_list('date', flat=True))
-    sleepDate = list(map(returnDate, sleepTime))
-    print(sleepDate)
+    date = list(map(returnDate, sleepTime))
+    studyHrs = list(Quota.objects.filter(user=request.user).values_list('study', flat=True))
+    print(date)
     if request.method=='POST':
         sleep = request.POST['sleep']
-        sleepDate = Quota.objects.filter(user=request.user).values_list('date', flat=True).order_by('-date')[0]
-        if sleepDate == timezone.now().date():
-            messages.info(request, 'You have already entered your sleep quota for today')
+        study = request.POST['study']
+        if Quota.objects.filter(date=timezone.now().date()).exists():
+            messages.info(request, 'You have already entered your sleep and study quota for today')
             return redirect('dashboard')
         else:
-            quota = Quota(user=request.user, sleep=sleep)
+            quota = Quota(user=request.user, sleep=sleep, study=study)
             quota.save()
             return redirect('dashboard')
     else:
-        return render(request, 'app/dashboard.html', {'tasks': tasks, 'goals': goals, 'sleep': sleep, 'sleepDate': sleepDate})
+        return render(request, 'app/dashboard.html', {'tasks': tasks, 'goals': goals, 'sleep': sleep, 'date': date, 'study':studyHrs})
 
 
 @login_required(login_url='login')

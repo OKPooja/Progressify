@@ -27,6 +27,6 @@ class Goal(models.Model):
 
 class Quota(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    sleep = models.IntegerField(null=True,blank=True)
-    study = models.IntegerField(null=True,blank=True)
+    sleep = models.IntegerField(default=0)
+    study = models.IntegerField(default=0)
     date = models.DateField(default=timezone.now)
