@@ -1,72 +1,81 @@
-{% extends 'main.html' %}
-
-{% block content %}
+{% extends 'main.html' %} {% block content %}
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <h1>Hello, {{ request.user }}</h1>
-    {% if user.is_authenticated %}
+{% if user.is_authenticated %}
 <li><a class="getstarted scrollto" href="logout">Logout</a></li>
 {% endif %}
-    <div>
-    <h2>Your To-do list</h2>
-        {% for task in tasks %}
-    <span>{{ task.name }}</span>
-    <span>{{ task.time|date:'d-m-y' }}</span><br>
-        {% endfor %}
-    <br>
-    <a href='{% url 'add-task' %}'>Add task</a>
-    </div>
-    <div>
-    <h2>Your long term Goals.</h2>
-        {% for goal in goals %}
-    <span>{{ goal.name }}</span>
-        <span>{{ goal.created|timesince }} ago</span><br>
-        {% endfor %}
-    <a href='{% url 'add-goal' %}'>Add a Goal</a>
-    </div><br>
-    <form method="POST" aciton="dashboard">
-        {% csrf_token %}
-    <p>How long did you sleep today? (in hours)</p>
-    <input type="number" name="sleep" data-sleep>
-    <p>How long did you study today? (in hours)</p>
-    <input type="number" name="study" data-study>
-    <input type="submit" value="Submit" data-quota-button>
-    </form>
-    {% for message in messages %}
-    {{ message }}
-    {% endfor %}
-    <div id="sleep" style="width:100%;max-width:700px"></div>
-    <div id="study" style="width:100%;max-width:700px"></div>
-    {% load static %}
-    <script type="text/javascript">
-        let sleep = {{ sleep }};
-        let date = {{ date }};
-        let study = {{ study }};
-        console.log(sleep)
-        console.log(date)
+<div>
+  <h2>Your To-do list</h2>
+  <form method="post" action="dashboard" name="addtask">
+    {% csrf_token %}
+    <p>Enter task name</p>
+    <input type="text" name="taskname" />
+    <p>Enter due date:</p>
+    <input type="date" name="time" />
+    <input type="submit" value="Create task" />
+  </form>
+  {% for task in tasks %}
+  <span>{{ task.name }}</span>
+  <span>{{ task.time|date:'d-m-y' }}</span><br />
+  {% endfor %}
+  <br />
+</div>
+<div>
+  <h2>Your long term Goals.</h2>
+  <form method="post" action="dashboard">
+    {% csrf_token %}
+    <p>Enter Goal to create:</p>
+    <input type="text" name="goalname" />
+    <input type="submit" value="Create goal" />
+  </form>
+  {% for goal in goals %}
+  <span>{{ goal.name }}</span>
+  <span>{{ goal.created|timesince }} ago</span><br />
+  {% endfor %}
+</div>
+<br />
+<form method="POST" action="dashboard">
+  {% csrf_token %}
+  <p>How long did you sleep today? (in hours)</p>
+  <input type="number" name="sleep" data-sleep />
+  <p>How long did you study today? (in hours)</p>
+  <input type="number" name="study" data-study />
+  <input type="submit" value="Submit" data-quota-button />
+</form>
+{% for message in messages %} {{ message }} {% endfor %}
+<div id="sleep" style="width: 100%; max-width: 700px"></div>
+<div id="study" style="width: 100%; max-width: 700px"></div>
+{% load static %}
+<script type="text/javascript">
+  let sleep = {{ sleep }};
+  let date = {{ date }};
+  let study = {{ study }};
+  console.log(sleep)
+  console.log(date)
 
-        let data1 = [{
-            x: date,
-            y: sleep,
-            mode: "markers",
-            type: "scatter"
-        }];
-        let layout1 = {
-            xaxis: {range: [0, 30], title: "Date"},
-            yaxis: {range: [0, 10], title: "Hours of sleep"},
-            title: "Sleep"
-        };
-        Plotly.newPlot("sleep", data1, layout1);
-        let data2 = [{
-            x: date,
-            y: study,
-            mode: "markers",
-            type: "scatter"
-        }];
-        let layout2 = {
-            xaxis: {range: [0, 30], title: "Date"},
-            yaxis: {range: [0, 10], title: "Hours of study"},
-            title: "Study"
-        };
-        Plotly.newPlot("study", data2, layout2);
-    </script>
+  let data1 = [{
+      x: date,
+      y: sleep,
+      mode: "lines",
+      type: "scatter"
+  }];
+  let layout1 = {
+      xaxis: {range: [date[0], date[-1]], title: "Date"},
+      yaxis: {range: [0, 10], title: "Hours of sleep"},
+      title: "Sleep"
+  };
+  Plotly.newPlot("sleep", data1, layout1);
+  let data2 = [{
+      x: date,
+      y: study,
+      mode: "lines",
+      type: "scatter"
+  }];
+  let layout2 = {
+      xaxis: {range: [date[0], date[-1]], title: "Date"},
+      yaxis: {range: [0, 10], title: "Hours of study"},
+      title: "Study"
+  };
+  Plotly.newPlot("study", data2, layout2);
+</script>
 {% endblock %}

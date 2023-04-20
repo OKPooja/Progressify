@@ -79,14 +79,29 @@ def returnDate(x):
 
 @login_required(login_url='login')
 def dashboard(request):
+    month = timezone.now().month
     tasks = Task.objects.filter(user=request.user)
     goals = Goal.objects.filter(user=request.user)
-    sleep = list(Quota.objects.filter(user=request.user).values_list('sleep', flat=True))
-    sleepTime = list(Quota.objects.filter(user=request.user).values_list('date', flat=True))
+    sleep = list(Quota.objects.filter(user=request.user).values_list('sleep', flat=True))[-7:]
+    sleepTime = list(Quota.objects.filter(user=request.user).values_list('date', flat=True))[-7:]
     date = list(map(returnDate, sleepTime))
-    studyHrs = list(Quota.objects.filter(user=request.user).values_list('study', flat=True))
-    print(date)
-    if request.method=='POST':
+    studyHrs = list(Quota.objects.filter(user=request.user).values_list('study', flat=True))[-7:]
+    context = {'tasks': tasks, 'goals': goals, 'sleep': sleep, 'date': date, 'study':studyHrs}
+
+    if request.method == 'POST' and 'taskname' in request.POST:
+        name = request.POST['taskname']
+        time = request.POST['time']
+        task = Task(user=request.user, name=name, time=time)
+        task.save()
+        return redirect('dashboard')
+    
+    if request.method == 'POST' and 'goalname' in request.POST:
+        name = request.POST['goalname']
+        goal = Goal(user=request.user, name=name)
+        goal.save()
+        return redirect('dashboard')
+
+    if request.method=='POST' and ('sleep' in request.POST or 'study' in request.POST):
         sleep = request.POST['sleep']
         study = request.POST['study']
         if Quota.objects.filter(date=timezone.now().date()).exists():
@@ -97,27 +112,4 @@ def dashboard(request):
             quota.save()
             return redirect('dashboard')
     else:
-        return render(request, 'app/dashboard.html', {'tasks': tasks, 'goals': goals, 'sleep': sleep, 'date': date, 'study':studyHrs})
-
-
-@login_required(login_url='login')
-def add_task(request):
-    if request.method == 'POST':
-        name = request.POST['taskname']
-        time = request.POST['time']
-        task = Task(user=request.user, name=name, time=time)
-        task.save()
-        return redirect('dashboard')
-    else:
-        return render(request, 'app/add-task.html')
-
-
-@login_required(login_url='login')
-def add_goal(request):
-    if request.method == 'POST':
-        name = request.POST['goalname']
-        goal = Goal(user=request.user, name=name)
-        goal.save()
-        return redirect('dashboard')
-    else:
-        return render(request, 'app/add-goal.html')
+        return render(request, 'app/dashboard.html', context)
