@@ -2,8 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
-from .models import Profile, Task, Goal
+from .models import Profile, Task, Goal, Quota
+from django.utils import timezone
+import json
 
 
 # Create your views here.
@@ -46,7 +49,7 @@ def loginPage(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect('/')
+            return redirect('dashboard')
         else:
             messages.info(request, 'Invalid Credentials')
             return redirect('login')
@@ -71,11 +74,30 @@ def info(request):
         return render(request, 'app/info.html')
 
 
+def returnDate(x):
+    return int(x.strftime("%d"))
+
 @login_required(login_url='login')
 def dashboard(request):
     tasks = Task.objects.filter(user=request.user)
     goals = Goal.objects.filter(user=request.user)
-    return render(request, 'app/dashboard.html', {'tasks': tasks, 'goals': goals})
+    sleep = list(Quota.objects.filter(user=request.user).values_list('sleep', flat=True))
+    sleepTime = list(Quota.objects.filter(user=request.user).values_list('date', flat=True))
+    date = list(map(returnDate, sleepTime))
+    studyHrs = list(Quota.objects.filter(user=request.user).values_list('study', flat=True))
+    print(date)
+    if request.method=='POST':
+        sleep = request.POST['sleep']
+        study = request.POST['study']
+        if Quota.objects.filter(date=timezone.now().date()).exists():
+            messages.info(request, 'You have already entered your sleep and study quota for today')
+            return redirect('dashboard')
+        else:
+            quota = Quota(user=request.user, sleep=sleep, study=study)
+            quota.save()
+            return redirect('dashboard')
+    else:
+        return render(request, 'app/dashboard.html', {'tasks': tasks, 'goals': goals, 'sleep': sleep, 'date': date, 'study':studyHrs})
 
 
 @login_required(login_url='login')
