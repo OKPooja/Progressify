@@ -111,5 +111,20 @@ def dashboard(request):
             quota = Quota(user=request.user, sleep=sleep, study=study)
             quota.save()
             return redirect('dashboard')
+        
+    if request.method == 'POST' and 'update_task_status' in request.POST:
+        task_ids = request.POST.getlist('task_checkbox')
+        for task_id in task_ids:
+            task = Task.objects.get(id=task_id)
+            task.delete()
+        return redirect('dashboard')
+    
+    if request.method == 'POST' and 'update_goal_status' in request.POST:
+        goal_ids = request.POST.getlist('goal_checkbox')
+        for goal_id in goal_ids:
+            goal = Goal.objects.get(id=goal_id)
+            goal.delete()
+        return redirect('dashboard')
+
     else:
         return render(request, 'app/dashboard.html', context)
