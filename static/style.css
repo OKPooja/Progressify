@@ -28,6 +28,7 @@ body {
   grid-gap: 28rem;
   padding: 0 2rem;
 }
+
 .image {
   display: flex;
   justify-content: flex-end;

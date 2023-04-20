@@ -15,17 +15,17 @@
     <link rel="stylesheet" href="/static/style.css" />
     <title>Progressify</title>
   </head>
-  <body>
+  <body style="overflow-y: hidden;">
     {% for message in messages %}
-    <h5>{{message}}</h5>
+      <h5 style="position: absolute; top: 455px; color: rgb(187, 50, 50); margin-left: 130px;">{{message}}</h5>
     {% endfor %}
     <img class="waveflip" src="/static/images/waveflip.png" alt="" />
-    <div class="container">
-      <div class="login-container">
+    <div class="container" style="display: flex;margin-left: 100px;">
+      <div class="login-container" style="height: 550px;">
         <form method="POST" action="register">
           {% csrf_token %}
           <img class="profile" src="/static/images/profile.svg" alt="" />
-          <h2>Register</h2>
+          <h3 style="margin-bottom: -15px; font-size: 45px;">Register</h3>
           <div class="input-div one">
             <div class="i">
               <i class="fas fa-user"></i>
