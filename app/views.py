@@ -64,12 +64,20 @@ def logout(request):
 
 @login_required(login_url='login')
 def info(request):
-    details ={}
     if Profile.objects.filter(user = request.user).exists():
         profile = Profile.objects.get(user = request.user)
+    else:
+        profile = Profile()
+        profile.lastname = " "
+        profile.dateOfBirth = 0
+        profile.firstname = " "
+        profile.email = " "
+        profile.state = " "
+        profile.bio = " "
+        profile.designation = " "
+        profile.phoneno = 91
 
     if request.method == 'POST':
-
         firstname = request.POST['firstname']
         lastname = request.POST['lastname']
         state = request.POST['state']
@@ -92,6 +100,7 @@ def info(request):
             profile = Profile(user=request.user, firstname=firstname, lastname= lastname, state= state, bio=bio,dateOfBirth=dateOfBirth, email=email, phoneno=phoneno,designation=designation)
         
         profile.save()
+        
         return redirect('dashboard')
     else:
         return render(request, 'app/info.html',{'profile': profile})

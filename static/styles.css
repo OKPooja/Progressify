@@ -115,7 +115,6 @@ section {
 
 #feature-1 {
   margin-top: 70px;
-  box-shadow: 10px 10px 10px 0px rgba(11,43,91,0.75);
 }
 
 #con2 {
@@ -243,6 +242,5 @@ section {
 }
 
 .navbar navbar-light navbar-expand-md sticky-top.scrolled {
-  background: #CCD5AE;
+  background: #ccd5ae;
 }
-
