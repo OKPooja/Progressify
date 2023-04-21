@@ -1,10 +1,13 @@
 {% extends 'main.html' %} {% block content %}
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <h1>Hello, {{ request.user }}</h1>
-{% if user.is_authenticated %}
+{% comment %} {% if user.is_authenticated %}
 <li><a class="getstarted scrollto" href="logout">Logout</a></li>
-{% endif %}
+{% endif %} {% endcomment %}
 <div>
+  <a style="position: relative; justify-content: end" href="{% url 'info' %}"
+    >Profile</a
+  >
   <h2>Your To-do list</h2>
   <form method="post" action="dashboard" name="addtask">
     {% csrf_token %}

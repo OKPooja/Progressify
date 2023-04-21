@@ -1,10 +1,94 @@
+{% comment %} <h1>Edit Profile</h1>
 <div>
   <form method="post" action="info">
     {% csrf_token %}
     <label>Full name</label>
-    <input type="text" name="fullname" />
+    <input type="text" name="fullname" /><br /><br />
+    <label>Email</label>
+    <input type="text" name="email" /><br /><br />
+    <label>Gender</label>
+    <input type="text" name="gender" /><br /><br />
+    <label>Date of Birth</label>
+    <input type="text" name="dob" /><br /><br />
     <label>Designation</label>
     <input type="text" name="designation" />
-    <input type="submit" value="Submit" />
+    <input type="submit" value="Submit" /><br /><br />
   </form>
-</div>
+</div> {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fjalla+One&amp;display=swap">
+    <title>Profile</title>
+</head>
+<style>
+    body{background-image: url("https://images.unsplash.com/photo-1588421357574-87938a86fa28?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80")}.form-control:focus{box-shadow: none;border-color: rgba(5, 21, 44, 0.75)75}.profile-button{background: rgb(6, 21, 62);box-shadow: none;border: none}.profile-button:hover{background: #12628a}.profile-button:focus{background: #131a45;box-shadow: none}.profile-button:active{background: #275f73;box-shadow: none}.back:hover{color: #0b1b28;cursor: pointer}.labels{font-size: 11px}.add-experience:hover{background: #26306e;color: #ffffffef;cursor: pointer;border: solid 1px #252b80}
+    body{background-repeat: no-repeat; background-size: cover; font-family: 'Fjalla One', sans-serif; }
+</style>
+<body>
+  <form method="post" action="info">
+    {% csrf_token %}
+    <div class="container rounded mt-5 mb-4" style="background-color:#ffffffc9; box-shadow: 10px 10px 10px 0px rgba(0, 0, 0, 0.407);">
+         <div class="row"> 
+        <div class="col-md-5"> <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+        <img class="rounded-circle mt-5" style="height: 200px; width: 200px;" src="https://static.vecteezy.com/system/resources/previews/005/544/718/original/profile-icon-design-free-vector.jpg"><br><br>
+        <span class="font-weight-bold">{{ request.user }}</span><span class="text-black-50">{{profile.bio}}</span><span> </span></div> </div> 
+        <div class="col-md-6" style="padding-left: 50px;"> <div class="p-5 py-5"> <div class="d-flex justify-content-between align-items-center mb-3">
+             <h4 class="text-right" style="font-size: 45px">Edit Profile</h4> </div> 
+             <div class="row mt-2"> 
+                <div class="col-md-6">
+                    <label class="labels" style="font-size: 20px">First Name</label>
+                    <input type="text" class="form-control" placeholder="" value="{{profile.firstname}}" name="firstname"></div> 
+                <div class="col-md-6">
+                    <label class="labels" style="font-size: 20px">Last Name</label>
+                    <input type="text" class="form-control" value="{{profile.lastname}}" placeholder="" name="lastname"></div> </div> 
+              <div class="row mt-3"> 
+                  <div class="col-md-6">
+                    <label class="labels" style="font-size: 20px">PhoneNumber</label>
+                    <input type="text" class="form-control" placeholder="" value="{{profile.phoneno}}" name="phoneno"></div>
+                  <div class="col-md-6">
+                    <label class="labels" style="font-size: 20px">Date Of Birth</label>
+                    <input type="date" class="form-control" placeholder="YYYY-DD-MM" value="{{profile.dateOfBirth}}" name="dob"></div>
+              <div class="col-md-12"><br>
+                    <label class="labels" style="font-size: 20px">Email ID</label>
+                    <input type="text" class="form-control" placeholder="" value="{{profile.email}}" name="email"></div> 
+              <div class="col-md-12" ><br>
+                    <label class="labels" style="font-size: 20px">Bio</label>
+                    <input type="text" class="form-control" placeholder="" value="{{profile.bio}}" name="bio"></div> </div> 
+              <div class="row mt-3"> 
+                  <div class="col-md-6">
+                    <label class="labels" style="font-size: 20px">Designation</label>
+                    <input type="text" class="form-control" placeholder="" value="{{profile.designation}}" name="designation"></div> 
+                  <div class="col-md-6">
+                    <label class="labels" style="font-size: 20px">State</label>
+                    <input type="text" class="form-control" value="{{profile.state}}" placeholder="" name="state"></div> </div>
+                    <div class="mt-5 text-center">
+                      {% comment %} <input type="submit" value="Submit"/> {% endcomment %}
+              <button class="btn btn-primary btn-lg profile-button" type="submit" name="submit" value="Submit" >Save Profile</button> 
+            </div>
+                    </div> </div>
+                    <!-- <div class="col-md-4"> <div class="p-3 py-5"> 
+                        <div class="d-flex justify-content-between align-items-center experience">
+                            <span>Edit Experience</span><span class="border px-3 p-1 add-experience">
+                                <i class="fa fa-plus"></i>&nbsp;Experience</span></div><br> 
+                                <div class="col-md-12">
+                                    <label class="labels">Experience in Designing</label>
+                                    <input type="text" class="form-control" placeholder="experience" value="">
+                                </div> <br> 
+                                <div class="col-md-12"><label class="labels">Additional Details</label>
+                                    <input type="text" class="form-control" placeholder="additional details" value=""></div> </div> </div> </div>
+                                </div>
+                            </div>
+                    </div> -->
+                  </form>
+    
+        </body>
+</html>
+
+
