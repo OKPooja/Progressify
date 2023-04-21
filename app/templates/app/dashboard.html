@@ -176,27 +176,34 @@
         Your sleep across the week...
       </h1>
       <div id="sleep" style="width: 100%; max-width: 700px"></div>
-      <form>
-        <p>How long did you sleep today?</p>
-        <input
-          class="form-control"
-          type="number"
-          style="margin-top: 23px; margin-bottom: 23px"
-        /><input class="btn btn-primary" type="submit" />
-      </form>
     </div>
     <div class="col">
       <h1 style="padding-top: 10px; padding-bottom: 10px">
         Your work across the week...
       </h1>
       <div id="study" style="width: 100%; max-width: 700px"></div>
-      <form>
+    </div>
+  </div>
+  <div
+    class="row text-center"
+    style="
+      padding-top: 31px;
+      padding-bottom: 31px;
+      padding-left: 411px;
+      padding-right: 411px;
+    "
+  >
+    <div class="col">
+      <form method="post" action="dashboard">
+        {% csrf_token %}
+        <p>How long did you sleep today?</p>
+        <input class="form-control" type="number" name="sleep" />
         <p>How long did you work today?</p>
-        <input
-          class="form-control"
-          type="number"
-          style="margin-top: 22px; margin-bottom: 22px"
-        /><input class="btn btn-primary" type="submit" />
+        <input class="form-control" type="number" name="study" /><input
+          class="btn btn-primary"
+          type="submit"
+          style="margin-top: 19px; margin-bottom: 19px"
+        />
       </form>
     </div>
   </div>
