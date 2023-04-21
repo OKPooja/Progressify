@@ -94,6 +94,17 @@
             "
             >Logout</a
           >
+          <a
+            class="nav-link"
+            data-bss-hover-animate="pulse"
+            href="{% url 'info' %}"
+            style="
+              font-size: 22px;
+              font-family: 'Fjalla One', sans-serif;
+              color: var(--bs-white);
+            "
+            >Profile</a
+          >
           {% else %}
           <a
             class="nav-link"
@@ -104,7 +115,8 @@
               font-family: 'Fjalla One', sans-serif;
               color: var(--bs-white);
             "
-            >Login</a
+          >
+            Login</a
           ><a
             class="nav-link d-flex justify-content-around justify-content-lg-end align-items-lg-end"
             data-bss-hover-animate="pulse"

@@ -32,7 +32,7 @@ def registerPage(request):
                 user = User.objects.create_user(username=username, email=email, password=password1)
                 user.save()
                 auth.login(request, user)
-                return redirect('info')
+                return redirect('login')
         else:
             messages.info(request, 'Password mismatch')
             return redirect('register')
@@ -64,14 +64,37 @@ def logout(request):
 
 @login_required(login_url='login')
 def info(request):
+    details ={}
+    if Profile.objects.filter(user = request.user).exists():
+        profile = Profile.objects.get(user = request.user)
+
     if request.method == 'POST':
-        name = request.POST['fullname']
+
+        firstname = request.POST['firstname']
+        lastname = request.POST['lastname']
+        state = request.POST['state']
+        bio = request.POST['bio']
+        dateOfBirth = request.POST['dob']
+        email = request.POST['email']
+        phoneno = request.POST['phoneno']
         designation = request.POST['designation']
-        profile = Profile(user=request.user, name=name, designation=designation)
+
+        if Profile.objects.filter(user = request.user).exists():
+            profile.lastname = lastname
+            profile.dateOfBirth = dateOfBirth
+            profile.firstname = firstname
+            profile.email = email
+            profile.state = state
+            profile.bio = bio
+            profile.designation = designation
+            profile.phoneno = phoneno
+        else:
+            profile = Profile(user=request.user, firstname=firstname, lastname= lastname, state= state, bio=bio,dateOfBirth=dateOfBirth, email=email, phoneno=phoneno,designation=designation)
+        
         profile.save()
         return redirect('dashboard')
     else:
-        return render(request, 'app/info.html')
+        return render(request, 'app/info.html',{'profile': profile})
 
 
 def returnDate(x):
