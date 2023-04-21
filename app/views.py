@@ -79,16 +79,6 @@ def info(request):
         phoneno = request.POST['phoneno']
         designation = request.POST['designation']
 
-        details= {
-            'firstname': firstname,
-            'lastname': lastname,
-            'email': email,
-            'state': state,
-            'dateOfBirth': dateOfBirth,
-            'phoneno': phoneno,
-            'bio': bio,
-            'designation':designation,
-        }
         if Profile.objects.filter(user = request.user).exists():
             profile.lastname = lastname
             profile.dateOfBirth = dateOfBirth
