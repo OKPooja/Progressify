@@ -31,7 +31,6 @@ def registerPage(request):
             else:
                 user = User.objects.create_user(username=username, email=email, password=password1)
                 user.save()
-                auth.login(request, user)
                 return redirect('login')
         else:
             messages.info(request, 'Password mismatch')
