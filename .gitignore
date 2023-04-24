@@ -4,3 +4,6 @@
 __pycache__
 db.sqlite3
 media
+.vscode
+.idea
+app/migrations/[0-9]*.py
