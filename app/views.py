@@ -1,17 +1,17 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.core.mail import send_mail
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from .models import Profile, Task, Goal, Quota
 from django.utils import timezone
-import json
 
 
 # Create your views here.
 def index(request):
     return render(request, 'app/index.html')
+
+
 
 
 def registerPage(request):
@@ -99,7 +99,7 @@ def info(request):
             profile = Profile(user=request.user, firstname=firstname, lastname= lastname, state= state, bio=bio,dateOfBirth=dateOfBirth, email=email, phoneno=phoneno,designation=designation)
         
         profile.save()
-        
+        send_mail('Some subject', 'Hello I am mailing you', 'no-reply@gmail.com', ['someone@gmail.com'])
         return redirect('dashboard')
     else:
         return render(request, 'app/info.html',{'profile': profile})
